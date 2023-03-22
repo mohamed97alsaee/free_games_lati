@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:free_games/models/game_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../widgets/game_card.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -115,9 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisCount: 2,
                                         childAspectRatio: 1,
                                         crossAxisSpacing: 8,
-                                        mainAxisSpacing: 8)
-                                        
-                                        ),
+                                        mainAxisSpacing: 8)),
                           )
                         : SizedBox(
                             height: size.height * 1.01,

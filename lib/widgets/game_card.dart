@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
 import 'package:free_games/models/game_model.dart';
 
 class GameCard extends StatelessWidget {
@@ -39,7 +36,7 @@ class GameCard extends StatelessWidget {
                         color: Colors.white,
                         width: 60,
                         height: 60,
-                        child: Icon(Icons.image)),
+                        child: const Icon(Icons.image)),
                   );
                 },
               ),
