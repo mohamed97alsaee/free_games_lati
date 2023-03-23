@@ -27,9 +27,7 @@ class GameCard extends StatelessWidget {
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
-                // loadingBuilder: (context, child, loadingProgress) {
-                //   // return loadingProgress CircularProgressIndicator();
-                // },
+                
                 errorBuilder: (context, error, stackTrace) {
                   return Center(
                     child: Container(
