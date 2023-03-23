@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_games/providers/games_provider.dart';
+import 'package:free_games/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/static_widgets/shimmer_widget.dart';
@@ -25,7 +26,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    // Listening to the theme provider
+    final themeListener = Provider.of<ThemeProvider>(context, listen: true);
+
+    //  Theme provider functions variable
+    final themeFunction = Provider.of<ThemeProvider>(context, listen: false);
+
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.dark_mode,
+                color: themeListener.isDark ? Colors.red : Colors.purple),
+            onPressed: () {
+              themeFunction.switchMode();
+
+              Provider.of<ThemeProvider>(context, listen: false).switchMode();
+            },
+          )
+        ],
+      ),
       body: Consumer<GamesProvider>(builder: (context, gamesConsumer, _) {
         return RefreshIndicator(
           onRefresh: () async {
