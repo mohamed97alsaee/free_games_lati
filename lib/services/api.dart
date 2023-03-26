@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class Api {
-  get(url, Map body) async {
+  Future<Response> get(url, Map body) async {
     if (kDebugMode) {
       print("GET ON $baseUrl$url");
     }

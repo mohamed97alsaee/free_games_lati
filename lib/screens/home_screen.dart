@@ -3,6 +3,7 @@ import 'package:free_games/providers/games_provider.dart';
 import 'package:free_games/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/game_card.dart';
 import '../widgets/static_widgets/shimmer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -74,50 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       radius: 10,
                                       width: 200,
                                     )
-                                  : ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: GridTile(
-                                          header: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                Icon(gamesConsumer
-                                                        .gamesList[index]
-                                                        .platform
-                                                        .contains('PC')
-                                                    ? Icons.computer
-                                                    : Icons.web)
-                                              ],
-                                            ),
-                                          ),
-                                          footer: Container(
-                                            color: Colors.white70,
-                                            child: Column(
-                                              children: [
-                                                Text(gamesConsumer
-                                                    .gamesList[index].title),
-                                                Text(gamesConsumer
-                                                    .gamesList[index].platform),
-                                              ],
-                                            ),
-                                          ),
-                                          child: Image.network(
-                                            gamesConsumer
-                                                .gamesList[index].thumbnail,
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Center(
-                                                child: Container(
-                                                    color: Colors.white,
-                                                    width: 60,
-                                                    height: 60,
-                                                    child: const Icon(
-                                                        Icons.image)),
-                                              );
-                                            },
-                                          )),
-                                    );
+                                  : GameCard(
+                                      gameModel:
+                                          gamesConsumer.gamesList[index]);
                             },
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(

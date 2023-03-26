@@ -1,52 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:free_games/models/game_model.dart';
+
+import '../models/game_model.dart';
+import '../screens/detailed_game_screen.dart';
 
 class GameCard extends StatelessWidget {
-  const GameCard({
-    super.key,
-    required this.gameModel,
-  });
+  const GameCard({super.key, required this.gameModel});
   final GameModel gameModel;
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: size.height / 10,
-        width: size.width * 0.9,
-        decoration: BoxDecoration(
-            color: Colors.black12, borderRadius: BorderRadius.circular(10)),
-        child: Row(
-          children: [
-            Padding(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailedGameScreen(
+                    gameId: gameModel.id,
+
+                    isPcGame:   gameModel.platform.contains('PC')
+                    || gameModel.platform.contains('Windows')
+
+                    )));
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: GridTile(
+            header: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                gameModel.thumbnail,
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-                
-                errorBuilder: (context, error, stackTrace) {
-                  return Center(
-                    child: Container(
-                        color: Colors.white,
-                        width: 60,
-                        height: 60,
-                        child: const Icon(Icons.image)),
-                  );
-                },
+              child: Row(
+                children: [
+                  Icon(gameModel.platform.contains('PC')
+                      ? Icons.computer
+                      : Icons.web)
+                ],
               ),
             ),
-            Column(
-              children: [
-                Text(gameModel.title),
-                Text(gameModel.platform),
-              ],
-            )
-          ],
-        ),
+            footer: Container(
+              color: Colors.white70,
+              child: Column(
+                children: [
+                  Text(gameModel.title),
+                  Text(gameModel.platform),
+                ],
+              ),
+            ),
+            child: Image.network(
+              gameModel.thumbnail,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Center(
+                  child: Container(
+                      color: Colors.white,
+                      width: 60,
+                      height: 60,
+                      child: const Icon(Icons.image)),
+                );
+              },
+            )),
       ),
     );
   }
